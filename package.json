@@ -1,0 +1,24 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "Mqtt/Node Express/Chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MRuniversee/NodeJS.Mqtt.Chat.git"
+  },
+  "author": "Renato Bylykbashi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MRuniversee/NodeJS.Mqtt.Chat/issues"
+  },
+  "homepage": "https://github.com/MRuniversee/NodeJS.Mqtt.Chat#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mosca": "^2.5.1",
+    "pug": "^2.0.0-rc.2"
+  }
+}
