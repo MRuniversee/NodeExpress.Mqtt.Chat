@@ -5,7 +5,7 @@ const path = require('path'); // Path module for paths
 const app = express() // Init App
 
 
-
+app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
