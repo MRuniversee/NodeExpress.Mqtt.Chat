@@ -1,5 +1,5 @@
 body{
-	background:#16a085;
+	background:gray;
 	margin:0px;
 	height:900px;
 	font-family: sans-serif;
@@ -129,5 +129,8 @@ body{
 }
 /* Custom CSS ---------------------------------- */
 .thisfooter{
-	bottom: 0;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
 }
