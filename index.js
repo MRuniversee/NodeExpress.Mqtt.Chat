@@ -10,31 +10,32 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 
+// DEFAULT USER ------------------------------------------------------------------------
 app.get('/', function(req, res) {
   res.render('index', {
     username: 'Default'
   });
 });
-
+// USER 1 -----------------------------------------------------------------------------
 app.get('/user1', function(req, res) {
   res.render('index', {
     username: 'User One'
   });
 });
-
+// USER 2 ----------------------------------------------------------------------------
 app.get('/user2', function(req, res) {
   res.render('index', {
     username: 'User Two'
   });
 });
-
+// USER 3 ----------------------------------------------------------------------------
 app.get('/user3', function(req, res) {
   res.render('index', {
     username: 'User Three'
   });
 });
 
-//  Start Server
+//  Start Server ----------------------------------------------------------------------------
 app.listen(3000, function() {
   console.log('Chat app listening on port 3000!')
 })
