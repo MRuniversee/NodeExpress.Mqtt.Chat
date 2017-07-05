@@ -1,4 +1,26 @@
 extends module_template/layout
   
 block content
-  h1 Welcome to my chatroom ! You are logged in as #{username}
+  nav(class='navbar navbar-default navbar-right navbar-fixed-top')
+    div(class='container')
+      div(class='navbar-header')
+         a.navbar-brand
+           img(src='design/images/RfavDark.ico' style='width:30px;height:30px;')
+         p(class='navbar-text' style='font-size:25px;') Welcome to my chatroom ! You are logged in as    
+          a(style='font-weight:bold;') #{username}
+      div.chat_box
+        div.chat_head Online Users
+        div.chat_body
+          div.user 
+            - var onlineUsers=[]
+              if(onlineUsers == 0)
+                p No Users Online
+              else
+                p Many Users Online
+        
+    
+        
+            
+          
+        
+            
