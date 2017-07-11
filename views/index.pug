@@ -2,21 +2,36 @@ extends module_template/layout
   
 block content
   nav(class='navbar navbar-default navbar-right navbar-fixed-top')
-    div(class='container')
+    div(class='container' style='width:100%;')
       div(class='navbar-header')
          a.navbar-brand
            img(src='design/images/RfavDark.ico' style='width:30px;height:30px;')
-         p(class='navbar-text' style='font-size:25px;') Welcome to my chatroom ! You are logged in as    
-          a(style='font-weight:bold;') #{username}
+         p(class='navbar-text' style='font-size:25px;') 
+          |Welcome to my chatroom ! You are logged in as    
+          |<a id='username' style='font-weight:bold;'> #{username} </a>
+          |if none is online , reopen this page in incognito mode !  
       div.chat_box
         div.chat_head Online Users
         div.chat_body
-          div.user 
-            - var onlineUsers=[]
-              if(onlineUsers == 0)
-                p No Users Online
-              else
-                p Many Users Online
+          //-
+            - var onlineUsers=[];
+            - if(onlineUsers == 0){
+            -    div.user No Users Online
+            - }else{
+            -    div.user Many Users Online
+            - } 
+      div(class='msg_box' style='right:290px; display:none;')
+        div.msg_head User name
+          div.close X
+        div.msg_wrap
+          div.msg_body
+            div.msg_a Hey
+            div.msg_b Hello
+            div.msg_push
+          div.msg_footer
+            textarea.msg_input
+  
+        
         
     
         

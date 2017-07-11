@@ -6,7 +6,30 @@ html
     link(rel='stylesheet' href='design/custom/style.css')
   body
     block content
-    
+
     footer.thisfooter
-      hr
+
       p Copyright &copy; 2017 Renato Bylykbashi
+      script(src='design/jquery/dist/jquery.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js')
+      - var client  = myMqttfunction.connect('mqtt://localhost');
+      - var lastUserOnline ='empty';
+      - $(document).ready(function ($) {
+      -   client.on('connect', function () {
+      -   client.subscribe('chatroom');
+      -   client.subscribe('chatroomOnlineUsers');
+      -   client.publish('chatroomOnlineUsers', username);
+      -   });
+      -   client.on('message', function (topic, message) {
+      -    console.log('Message from Client : '+ message.toString());
+      -    $('<div class="user">'+ message.toString() +'<div>').insertAfter('.chat_body');
+      -    if(topic == 'chatroomOnlineUsers'){
+      -       console.log("In the topic with user : " + this.lastUserOnline);
+      -       if(lastUserOnline==''){
+      -       }
+      -       lastUserOnline = message.toString();
+      -     }else{
+      -     }
+      -   });
+      - });
+      script(src='design/scripts/chatScript.js')

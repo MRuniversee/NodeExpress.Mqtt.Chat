@@ -4,6 +4,8 @@ const ascoltatori = require('ascoltatori'); //----
 const path = require('path'); // Path module for paths
 const app = express() // Init App
 
+var mymqtt = require('mqtt');
+
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -13,32 +15,18 @@ app.set('view engine', 'pug');
 // DEFAULT USER ------------------------------------------------------------------------
 app.get('/', function(req, res) {
   res.render('index', {
-    username: 'Default'
-  });
-});
-// USER 1 -----------------------------------------------------------------------------
-app.get('/user1', function(req, res) {
-  res.render('index', {
-    username: 'User One'
-  });
-});
-// USER 2 ----------------------------------------------------------------------------
-app.get('/user2', function(req, res) {
-  res.render('index', {
-    username: 'User Two'
-  });
-});
-// USER 3 ----------------------------------------------------------------------------
-app.get('/user3', function(req, res) {
-  res.render('index', {
-    username: 'User Three'
+    username: 'Default_'+ parseInt(Math.random() * 100, 10),
+    myMqttfunction : mymqtt
   });
 });
 
+// Update User List  ----------------------------------------------------------------------------
+app.get('/getUsers', function(req, res) {
+  res.json('This is my answer');
+});
+
 //  Start Server ----------------------------------------------------------------------------
-app.listen(3000, function() {
-  console.log('Chat app listening on port 3000!')
-})
+app.listen(3000, function() {})
 
 // Settings for Mqtt -------------------------------------------------------------------
 settings = {
@@ -53,18 +41,22 @@ ascoltatori.build(settings, function(ascoltatore) {});
 // Declare and Start Mqtt Server  -------------------------------------------------------------------
 var server = new mosca.Server(settings);
 
+// fired when a message is published
+server.on('published', function(packet, client) {
+  console.log('Published', packet.payload.toString());
+});
+// fired when a client connects
 server.on('clientConnected', function(client) {
-  console.log('client connected', client.id);
+  console.log('Client Connected:', client.id);
+  
 });
 
-// fired when a message is received
-server.on('published', function(packet, client) {
-  console.log('Published', packet.payload);
+// fired when a client disconnects
+server.on('clientDisconnected', function(client) {
+//  console.log('Client Disconnected:', client.id);
 });
 
 server.on('ready', setup);
 
 // fired when the mqtt server is ready
-function setup() {
-  console.log('Mosca server is up and running');
-}
+function setup() {}
