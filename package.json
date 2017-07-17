@@ -4,7 +4,7 @@
   "description": "Mqtt/Node Express/Chat",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MRuniversee/NodeJS.Mqtt.Chat#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mosca": "^2.5.1",
     "mqtt": "^2.9.0",
