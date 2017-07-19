@@ -14,6 +14,9 @@ $(document).ready(function(){
 // Close chatbox with X -------------------------------------------------------------------------------------------------------
 function msgClose(id){
 	$('.msg_box#'+id).hide();
+//	if(lastChatBox==id){
+//		lastChatBox='';
+//	}
 	// TODO -- FIX the chatbox places
 }
 // Hide chatbox ---------------------------------------------------------------------------------------------------------------
@@ -53,6 +56,9 @@ function sendMsg(id){
 		$('.msg_box#'+id).show();
 		openChats++;
 		lastChatBox = id;
+	}else{
+		$('.msg_box#'+id).show();
+		msgHead(id);
 	}
 };
 
