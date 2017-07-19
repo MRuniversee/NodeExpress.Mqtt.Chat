@@ -21,10 +21,10 @@ html
            $('.chat_body').append('<div class="user" id="'+ Users[i] + '" onclick="sendMsg(\''+ Users[i] + '\')">'+ Users[i] +'<div>'); // add currently online users 
          }
        }
-       // Do this when client connects -------------------------------------------
+       // Do this when client connects -------------------------------------------------------
        function onConnect() {
         console.log("Connected to chatroom !");
-        client.subscribe("chatroom/#{username}",1);
+        client.subscribe("chatroom/client_#{username}",1);
         client.subscribe("chatroomOnlineUsers",1);
         message = new Paho.MQTT.Message('client_#{username}');
         message.destinationName = "chatroomOnlineUsers";
@@ -36,6 +36,8 @@ html
          //TODO --  Maybe add ajax request for current online Users after new login !!
          if(message.destinationName == 'chatroomOnlineUsers' && message.payloadString != 'client_#{username}'){
            $('.chat_body').append('<div class="user" id="'+ message.payloadString + '" onclick="sendMsg(\''+ message.payloadString + '\')">'+ message.payloadString +'<div>');
+         }else{
+           gotMessage('client_#{username}',message.payloadString);
          }
        }
       script(src='design/scripts/chatScript.js')

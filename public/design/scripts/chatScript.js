@@ -10,6 +10,7 @@ $(document).ready(function(){
 
 });
 
+// Open chatbox with the selected user -------------------------------------------------------------------------------------------------------
 function sendMsg(id){
 	if(lastChatBox!=id){
 		$('<div class="msg_box" id="'+id+'"style="right:'+openChats*290+'px; display:none;">'+
@@ -20,23 +21,24 @@ function sendMsg(id){
 					  '</div>'+
 				'</div>'+
 			'</div>').insertAfter('.chat_box');
-		$('.msg_wrap').show();
-		$('.msg_box').show();
+		$('.msg_wrap#'+id).show();
+		$('.msg_box#'+id).show();
 		openChats++;
 		lastChatBox = id;
 	}
 };
 
-
+// Close chatbox with X -------------------------------------------------------------------------------------------------------
 function msgClose(id){
 	$('.msg_box#'+id).hide();
 	// TODO -- FIX the chatbox places
 }
-
+// Hide chatbox ---------------------------------------------------------------------------------------------------------------
 function msgHead(id){
 	$('.msg_wrap#'+id).slideToggle('slow');
 }
 
+// Send the messaged that was typed in textarea -------------------------------------------------------------------------------------------------------
 function sendText(id,event){
 	if (event.keyCode == 13){
 		event.preventDefault();
@@ -45,6 +47,15 @@ function sendText(id,event){
 		if(msg!=''){
 			$('<div class="msg_b">'+msg+'</div>').insertBefore('.msg_push#'+id);
 			$('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+			message = new Paho.MQTT.Message(msg);
+			message.destinationName = "chatroom/"+id;
+			message.qos = 1;
+			client.send(message);
 		}
 	}
+}
+
+// Display the recieved message -------------------------------------------------------------------------------------------------
+function gotMessage(id,message){
+	console.log('Got a replay from '+id+' with the message :'+message);
 }
