@@ -10,23 +10,6 @@ $(document).ready(function(){
 
 });
 
-// Open chatbox with the selected user -------------------------------------------------------------------------------------------------------
-function sendMsg(id){
-	if(lastChatBox!=id){
-		$('<div class="msg_box" id="'+id+'"style="right:'+openChats*290+'px; display:none;">'+
-				'<div class="msg_head" id="'+id+'" onclick="msgHead(\''+id+'\')" >'+ id +'<div class="close" id="'+id+'" onclick="msgClose(\''+id+'\')"> X </div> </div>'+
-				'<div class="msg_wrap" id="'+id+'"><div class="msg_body"><div class="msg_push" id="'+id+'"></div></div>'+
-						'<div class="msg_footer">'+
-								'<textarea id="'+id+'" onkeypress="sendText(\''+id+'\',event)" class="msg_input" rows="3"></textarea>'+
-					  '</div>'+
-				'</div>'+
-			'</div>').insertAfter('.chat_box');
-		$('.msg_wrap#'+id).show();
-		$('.msg_box#'+id).show();
-		openChats++;
-		lastChatBox = id;
-	}
-};
 
 // Close chatbox with X -------------------------------------------------------------------------------------------------------
 function msgClose(id){
@@ -55,7 +38,44 @@ function sendText(id,event){
 	}
 }
 
+// Open chatbox with the selected user -------------------------------------------------------------------------------------------------------
+function sendMsg(id){
+	if(lastChatBox!=id){
+		$('<div class="msg_box" id="'+id+'"style="right:'+openChats*290+'px; display:none;">'+
+				'<div class="msg_head" id="'+id+'" onclick="msgHead(\''+id+'\')" >'+ id +'<div class="close" id="'+id+'" onclick="msgClose(\''+id+'\')"> X </div> </div>'+
+				'<div class="msg_wrap" id="'+id+'"><div class="msg_body"><div class="msg_push" id="'+id+'"></div></div>'+
+						'<div class="msg_footer">'+
+								'<textarea id="'+id+'" onkeypress="sendText(\''+id+'\',event)" class="msg_input" rows="3"></textarea>'+
+					  '</div>'+
+				'</div>'+
+			'</div>').insertAfter('.chat_box');
+		$('.msg_wrap#'+id).show();
+		$('.msg_box#'+id).show();
+		openChats++;
+		lastChatBox = id;
+	}
+};
+
 // Display the recieved message -------------------------------------------------------------------------------------------------
-function gotMessage(id,message){
-	console.log('Got a replay from '+id+' with the message :'+message);
+function gotMessage(id,msg){
+//	console.log('Got a replay from '+id+' with the message :'+message);
+	if(lastChatBox!=id){
+		$('<div class="msg_box" id="'+id+'"style="right:'+openChats*290+'px; display:none;">'+
+				'<div class="msg_head" id="'+id+'" onclick="msgHead(\''+id+'\')" >'+ id +'<div class="close" id="'+id+'" onclick="msgClose(\''+id+'\')"> X </div> </div>'+
+				'<div class="msg_wrap" id="'+id+'"><div class="msg_body"><div class="msg_push" id="'+id+'"></div></div>'+
+						'<div class="msg_footer">'+
+								'<textarea id="'+id+'" onkeypress="sendText(\''+id+'\',event)" class="msg_input" rows="3"></textarea>'+
+						'</div>'+
+				'</div>'+
+			'</div>').insertAfter('.chat_box');
+		$('.msg_wrap#'+id).show();
+		$('.msg_box#'+id).show();
+		openChats++;
+		lastChatBox = id;
+		$('<div class="msg_a">'+msg+'</div>').insertBefore('.msg_push#'+id);
+		$('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+	}else{
+		$('<div class="msg_a">'+msg+'</div>').insertBefore('.msg_push#'+id);
+		$('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+	}
 }
