@@ -47,7 +47,7 @@ function sendText(id,event){
 		if(msg!=''){
 			$('<div class="msg_b">'+msg+'</div>').insertBefore('.msg_push#'+id);
 			$('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
-			message = new Paho.MQTT.Message(msg);
+			message = new Paho.MQTT.Message(currentUser+'~/,'+msg);
 			message.destinationName = "chatroom/"+id;
 			message.qos = 1;
 			client.send(message);

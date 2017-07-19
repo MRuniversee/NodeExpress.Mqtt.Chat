@@ -14,6 +14,7 @@ html
       script(src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js')
       script(type='text/javascript').
        var Users = '#{theOnlineUsers}'.split(',');
+       var currentUser ="client_#{username}";
        client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
        client.connect({onSuccess:onConnect});                                     // connect client
        if(Users.length>1){
@@ -33,11 +34,15 @@ html
        }
        // Do this when a message arrives from subscribed topics  --------------------------------------------------
        client.onMessageArrived = function onMessageArrived(message){
+         console.log(message.payloadString);
          //TODO --  Maybe add ajax request for current online Users after new login !!
          if(message.destinationName == 'chatroomOnlineUsers' && message.payloadString != 'client_#{username}'){
            $('.chat_body').append('<div class="user" id="'+ message.payloadString + '" onclick="sendMsg(\''+ message.payloadString + '\')">'+ message.payloadString +'<div>');
          }else{
-           gotMessage('client_#{username}',message.payloadString);
+           if(message.payloadString!='client_#{username}'){
+             themsg = message.payloadString.split('~/,');
+             gotMessage(themsg[0],themsg[1]);
+           }
          }
        }
       script(src='design/scripts/chatScript.js')
