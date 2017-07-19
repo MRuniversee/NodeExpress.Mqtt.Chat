@@ -13,23 +13,29 @@ html
       script(src='design/jquery/dist/jquery.min.js')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js')
       script(type='text/javascript').
+       var Users = '#{theOnlineUsers}'.split(',');
        client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');
        client.connect({onSuccess:onConnect});
-       client.onMessageArrived = onMessageArrived;
+       if(Users.length>0){
+         for(var i=0;i<Users.length;i++){
+           $('.chat_body').append('<div class="user" id='+ Users[i] + ' onclick="sendMsg(\''+ Users[i] + '\')">'+ Users[i] +'<div>');
+         }
+       }
+       
        function onConnect() {
         console.log("Connected to chatroom !");
-        client.subscribe("chatroom",1);
+        client.subscribe("chatroom/#{username}",1);
         client.subscribe("chatroomOnlineUsers",1);
-        message = new Paho.MQTT.Message('#{username}');
+        message = new Paho.MQTT.Message('client_#{username}');
         message.destinationName = "chatroomOnlineUsers";
         message.qos = 1;
         client.send(message);
        }
        
-       function onMessageArrived(message){
-         console.log("In the topic "+ message.destinationName + " with user : " + message.payloadString);
-         if(message.destinationName == 'chatroomOnlineUsers'){
-           $('.chat_body').append('<div class="user">'+ message.payloadString +'<div>');
+       client.onMessageArrived = function onMessageArrived(message){
+         //TODO --  Maybe add ajax request for current online Users after new login !!
+         if(message.destinationName == 'chatroomOnlineUsers' && message.payloadString != 'client_#{username}'){
+           $('.chat_body').append('<div class="user" id="'+ message.payloadString + '" onclick="sendMsg(\''+ message.payloadString + '\')">'+ message.payloadString +'<div>');
          }
        }
       script(src='design/scripts/chatScript.js')
