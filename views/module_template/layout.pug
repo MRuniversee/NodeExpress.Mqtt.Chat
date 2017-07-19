@@ -14,14 +14,14 @@ html
       script(src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js')
       script(type='text/javascript').
        var Users = '#{theOnlineUsers}'.split(',');
-       client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');
-       client.connect({onSuccess:onConnect});
-       if(Users.length>0){
+       client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
+       client.connect({onSuccess:onConnect});                                     // connect client
+       if(Users.length>1){
          for(var i=0;i<Users.length;i++){
-           $('.chat_body').append('<div class="user" id='+ Users[i] + ' onclick="sendMsg(\''+ Users[i] + '\')">'+ Users[i] +'<div>');
+           $('.chat_body').append('<div class="user" id="'+ Users[i] + '" onclick="sendMsg(\''+ Users[i] + '\')">'+ Users[i] +'<div>'); // add currently online users 
          }
        }
-       
+       // Do this when client connects -------------------------------------------
        function onConnect() {
         console.log("Connected to chatroom !");
         client.subscribe("chatroom/#{username}",1);
@@ -31,7 +31,7 @@ html
         message.qos = 1;
         client.send(message);
        }
-       
+       // Do this when a message arrives from subscribed topics  --------------------------------------------------
        client.onMessageArrived = function onMessageArrived(message){
          //TODO --  Maybe add ajax request for current online Users after new login !!
          if(message.destinationName == 'chatroomOnlineUsers' && message.payloadString != 'client_#{username}'){
