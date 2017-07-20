@@ -93,7 +93,7 @@ body{
 	padding:10px;
 	min-height:10px;
 	margin-bottom:5px;
-	margin-right:10px;
+	margin-right:56px;
 	border-radius:5px;
 }
 .msg_a:before{
@@ -105,6 +105,7 @@ body{
 	border-color: transparent #FDE4CE transparent transparent;
 	left:-20px;
 	top:7px;
+  word-wrap: break-word;
 }
 
 
@@ -114,7 +115,7 @@ body{
 	min-height:15px;
 	margin-bottom:5px;
 	position:relative;
-	margin-left:10px;
+	margin-left:56px;
 	border-radius:5px;
 	word-wrap: break-word;
 }
@@ -134,4 +135,9 @@ body{
 	bottom: 0px;
 	width: 100%;
 	text-align: center;
+}
+
+.date_class{
+	font-size: 9px;
+	float: right;
 }

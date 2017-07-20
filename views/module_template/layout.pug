@@ -15,6 +15,7 @@ html
       script(type='text/javascript').
        var Users = '#{theOnlineUsers}'.split(',');
        var currentUser ="client_#{username}";
+       console.log(new Date());
        client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
        client.connect({onSuccess:onConnect});                                     // connect client
        if(Users.length>0 && Users[0]!=''){

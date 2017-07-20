@@ -78,10 +78,10 @@ function gotMessage(id,msg){
 		$('.msg_box#'+id).show();
 		openChats++;
 		lastChatBox = id;
-		$('<div class="msg_a">'+msg+'</div>').insertBefore('.msg_push#'+id);
+		$('<div class="msg_a">'+msg+'</div><div class="date_class">'+new Date().toUTCString() +'</div>').insertBefore('.msg_push#'+id);
 		$('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
 	}else{
-		$('<div class="msg_a">'+msg+'</div>').insertBefore('.msg_push#'+id);
+		$('<div class="msg_a">'+msg+'</div><div class="date_class">'+new Date().toUTCString() +'</div>').insertBefore('.msg_push#'+id);
 		$('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
 	}
 }
