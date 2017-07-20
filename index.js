@@ -26,13 +26,7 @@ app.get('/', function(req, res) {
 
 // Update User List  ----------------------------------------------------------------------------
 app.get('/getUsers', function(req, res) {
-  res.json(keptOnlineUsers);
-});
-
-// Create User   ----------------------------------------------------------------------------
-app.get('/CreateUser', function(req, res) {
-  var client  = mymqtt.connect('mqtt://localhost');
-  res.set('Content-Type', 'application/javascript');
+  res.json(keptOnlineUsers.filter(function(e){return e}).length);
 });
 
 //  Start Server ----------------------------------------------------------------------------
@@ -63,7 +57,7 @@ server.on('published', function(packet, client) {
 });
 // fired when a client connects
 server.on('clientConnected', function(client) {
-  console.log('Client Connected:', client.id);
+//  console.log('Client Connected:', client.id);
    if(client.id !='mqtt_library'){
      keptOnlineUsers[counter] = client.id;
      counter++;

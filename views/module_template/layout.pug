@@ -17,7 +17,7 @@ html
        var currentUser ="client_#{username}";
        client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
        client.connect({onSuccess:onConnect});                                     // connect client
-       if(Users.length>1){
+       if(Users.length>0 && Users[0]!=''){
          for(var i=0;i<Users.length;i++){
            $('.chat_body').append('<div class="user" id="'+ Users[i] + '" onclick="sendMsg(\''+ Users[i] + '\')">'+ Users[i] +'<div>'); // add currently online users 
          }
@@ -25,16 +25,15 @@ html
        // Do this when client connects -------------------------------------------------------
        function onConnect() {
         console.log("Connected to chatroom !");
-        client.subscribe("chatroom/client_#{username}",1);
-        client.subscribe("chatroomOnlineUsers",1);
-        message = new Paho.MQTT.Message('client_#{username}');
-        message.destinationName = "chatroomOnlineUsers";
-        message.qos = 1;
-        client.send(message);
+        client.subscribe("chatroom/client_#{username}",1);      // Topic for each client to recieve 
+        client.subscribe("chatroomOnlineUsers",1);              // Show that new user has logged in
+        message = new Paho.MQTT.Message('client_#{username}');  //  |
+        message.destinationName = "chatroomOnlineUsers";        //  |
+        message.qos = 1;                                        //  |
+        client.send(message);                                   //  publish username when you connect to mqtt broker 
        }
        // Do this when a message arrives from subscribed topics  --------------------------------------------------
        client.onMessageArrived = function onMessageArrived(message){
-         console.log(message.payloadString);
          //TODO --  Maybe add ajax request for current online Users after new login !!
          if(message.destinationName == 'chatroomOnlineUsers' && message.payloadString != 'client_#{username}'){
            $('.chat_body').append('<div class="user" id="'+ message.payloadString + '" onclick="sendMsg(\''+ message.payloadString + '\')">'+ message.payloadString +'<div>');
