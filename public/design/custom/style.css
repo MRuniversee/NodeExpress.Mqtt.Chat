@@ -19,7 +19,7 @@ body{
 }
 
 .chat_head,.msg_head{
-	background:#f39c12;
+	background:#403844;
 	color:white;
 	padding:15px;
 	font-weight:bold;
@@ -36,7 +36,7 @@ body{
 }
 
 .msg_head{
-	background:#3498db;
+	background:#573c65;
 }
 
 .msg_body{
@@ -89,12 +89,13 @@ body{
 
 .msg_a{
 	position:relative;
-	background:#FDE4CE;
+	background:#b2b9b4;
 	padding:10px;
 	min-height:10px;
 	margin-bottom:5px;
 	margin-right:56px;
 	border-radius:5px;
+	color: black;
 }
 .msg_a:before{
 	content:"";
@@ -102,7 +103,7 @@ body{
 	width:0px;
 	height:0px;
 	border: 10px solid;
-	border-color: transparent #FDE4CE transparent transparent;
+	border-color: transparent #b2b9b4 transparent transparent;
 	left:-20px;
 	top:7px;
   word-wrap: break-word;
@@ -110,7 +111,7 @@ body{
 
 
 .msg_b{
-	background:#EEF2E7;
+	background:#3281c5;
 	padding:10px;
 	min-height:15px;
 	margin-bottom:5px;
@@ -118,6 +119,7 @@ body{
 	margin-left:56px;
 	border-radius:5px;
 	word-wrap: break-word;
+	color: white;
 }
 .msg_b:after{
 	content:"";
@@ -125,7 +127,7 @@ body{
 	width:0px;
 	height:0px;
 	border: 10px solid;
-	border-color: transparent transparent transparent #EEF2E7;
+	border-color: transparent transparent transparent #3281c5;
 	right:-20px;
 	top:7px;
 }
@@ -139,5 +141,4 @@ body{
 
 .date_class{
 	font-size: 9px;
-	float: right;
 }
