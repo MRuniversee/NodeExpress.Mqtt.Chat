@@ -13,8 +13,8 @@ html
       script(src='design/jquery/dist/jquery.min.js')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js')
       script(type='text/javascript').
-       var Users = '#{theOnlineUsers}'.split(',');
-       var currentUser ="client_#{username}";
+       let Users = '#{theOnlineUsers}'.split(',');
+       let currentUser ="client_#{username}";
        client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
        client.connect({onSuccess:onConnect});                                     // connect client
        if(Users.length>0 && Users[0]!=''){

@@ -1,6 +1,6 @@
 
-var openChats = 1;
-var lastChatBox = '';
+let openChats = 1;
+let lastChatBox = '';
 
 $(document).ready(function(){
 	$('.chat_head').click(function(){
