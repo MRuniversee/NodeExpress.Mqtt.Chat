@@ -13,7 +13,8 @@ html
       script(src='design/jquery/dist/jquery.min.js')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js')
       script(type='text/javascript').
-       let Users = '#{theOnlineUsers}'.split(',');
+       // let Users = '#{theOnlineUsers}'.split(',');                                // split the names on ,
+       let Users = [];
        let currentUser ="client_#{username}";
        client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
        client.connect({onSuccess:onConnect});                                     // connect client
@@ -36,12 +37,32 @@ html
        client.onMessageArrived = function onMessageArrived(message){
          //TODO --  Maybe add ajax request for current online Users after new login !!
          if(message.destinationName == 'chatroomOnlineUsers' && message.payloadString != 'client_#{username}'){
-           $('.chat_body').append('<div class="user" id="'+ message.payloadString + '" onclick="sendMsg(\''+ message.payloadString + '\')">'+ message.payloadString +'<div>');
+           checkTheUsers();
          }else{
            if(message.payloadString!='client_#{username}'){
              themsg = message.payloadString.split('~/,');
              gotMessage(themsg[0],themsg[1]);
            }
          }
+       }
+       // Get the online users --------------------------------------------------------------------------------------
+       $(document).ready(checkTheUsers());
+       
+       function checkTheUsers() { 
+          let i = 0;
+          $('.chat_body').empty();
+          $.ajax({
+              type: 'GET', 
+              url: 'http://localhost:3000/getusers', 
+              data: {}, 
+              dataType: 'json',
+              success: function (data) { 
+                  data.forEach(function(usar){
+                    if(usar != 'client_#{username}'){
+                      $('.chat_body').append('<div class="user" id="'+ usar + '" onclick="sendMsg(\''+ usar + '\')">'+ usar +'<div>');
+                    }
+                  })
+              }
+            });
        }
       script(src='design/scripts/chatScript.js')
