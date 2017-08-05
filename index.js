@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
 
 // Update User List  ----------------------------------------------------------------------------
 app.get('/getUsers', function(req, res) {
-  res.json(keptOnlineUsers.filter(function(e){return e}).length);
+  res.json(keptOnlineUsers.filter(function(e){return e}));
 });
 
 //  Start Server ----------------------------------------------------------------------------
