@@ -11,19 +11,20 @@ $(document).ready(function(){
 });
 
 
-// Close chatbox with X -------------------------------------------------------------------------------------------------------
+// Close chatbox with X ------------------------------------------------------------------------------------------------------------------------------
 function msgClose(id){
 	$('#'+id+'.msg_box').remove();
 	// TODO -- FIX the chatbox places
 	removeFromOpen(id);
+	restructureChatBoxes();
 	//console.log(openChats);
 }
-// Hide chatbox ---------------------------------------------------------------------------------------------------------------
+// Hide chatbox --------------------------------------------------------------------------------------------------------------------------------------
 function msgHead(id){
 	$('#'+id+'.msg_wrap').slideToggle('slow');
 }
 
-// Send the messaged that was typed in textarea -------------------------------------------------------------------------------------------------------
+// Send the message that was typed in textarea -------------------------------------------------------------------------------------------------------
 function sendText(id,event){
 	if (event.keyCode == 13){
 		event.preventDefault();
@@ -40,7 +41,7 @@ function sendText(id,event){
 	}
 }
 
-// Open chatbox with the selected user -------------------------------------------------------------------------------------------------------
+// Open chatbox with the selected user ----------------------------------------------------------------------------------------------------------------
 function sendMsg(id){
 	if(!checkIfOpen(id)){
 		$('<div class="msg_box" id="'+id+'"style="right:'+openChats.length*290+'px; display:none;">'+
@@ -59,7 +60,7 @@ function sendMsg(id){
 	}
 };
 
-// Display the recieved message -------------------------------------------------------------------------------------------------
+// Display the recieved message ------------------------------------------------------------------------------------------------------------------------
 function gotMessage(id,msg){
 //	console.log('Got a replay from '+id+' with the message :'+message);
 	if(!checkIfOpen(id)){
