@@ -1,14 +1,14 @@
 const express = require('express') // Express framework for node js
 const mosca = require('mosca'); // Mosca mqtt server
 const ascoltatori = require('ascoltatori'); //----
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const path = require('path'); // Path module for paths
 const app = express() // Init App
 
 var mymqtt = require('mqtt');
 var keptOnlineUsers = [];
 var counter = 0 ;
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
