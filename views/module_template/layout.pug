@@ -16,7 +16,7 @@ html
        // let Users = '#{theOnlineUsers}'.split(',');                                // split the names on ,
        let Users = [];
        let currentUser ="client_#{username}";
-       client = new Paho.MQTT.Client('127.0.0.1', 80 , 'client_#{username}');     // create client
+       client = new Paho.MQTT.Client('127.0.0.1', 90 , 'client_#{username}');     // create client
        client.connect({onSuccess:onConnect});                                     // connect client
        if(Users.length>0 && Users[0]!=''){
          for(var i=0;i<Users.length;i++){
