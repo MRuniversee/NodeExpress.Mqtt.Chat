@@ -4,7 +4,7 @@
   "description": "Mqtt/Node Express/Chat",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js "
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "express": "^4.15.3",
     "mosca": "^2.5.1",
     "mqtt": "^2.9.0",
+    "nodemon": "^1.11.0",
     "pug": "^2.0.0-rc.2"
   }
 }
