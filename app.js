@@ -11,7 +11,7 @@ var counter = 0;
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'pug');
 
 
