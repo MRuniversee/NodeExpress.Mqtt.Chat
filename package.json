@@ -4,7 +4,8 @@
   "description": "Mqtt/Node Express/Chat",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "nodeStart": "nodemon"
   },
   "repository": {
     "type": "git",
